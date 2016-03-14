@@ -9,7 +9,7 @@
     %title TestApp
     %link{:href => '/vendor/bootstrap/css/bootstrap.min.css', :rel => 'stylesheet'}
     %link{:href => "/css/screen.css", :rel => "stylesheet"}
-  %body
+
   %body
     %nav{:class => 'navbar navbar-inverse navbar-fixed-top'}
       %div{:class => 'container'}
@@ -23,7 +23,7 @@
             %span{:class => 'icon-bar'}
           %a{:class => 'navbar-brand', :href => '#'} Project name
         %div{:id => 'navbar', :class => 'navbar-collapse collapse'}
-          %form{:class => 'navbar-form navbar-right'}
+          %form{:class => 'navbar-form navbar-right', :action => 'login'}
             %div{:class => 'form-group'}
               %input{:type => 'text', :placeholder => 'username', :class => 'form-control'}
             %div{:class => 'form-group'}

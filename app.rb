@@ -1,3 +1,5 @@
+#require 'celluloid/autostart'
+#require 'reel/rack/server'
 require 'sinatra/base'
 require 'tilt/haml'
 require 'tilt/sass'
@@ -11,7 +13,7 @@ class App < Sinatra::Base
 
   configure :development do
     enable :dump_errors, :logging
-    set :server, 'puma'
+    #set :server, 'reel'
     set :bind, '0.0.0.0'
     set :port, 3000
   end
@@ -25,6 +27,9 @@ class App < Sinatra::Base
 
   get '/*' do
     haml :app
+  end
+
+  post '/login' do
   end
 
   run! if app_file == $0
