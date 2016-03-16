@@ -5,10 +5,11 @@ require 'sinatra/base'
 require 'tilt/haml'
 require 'tilt/sass'
 require 'chartkick'
+require 'csv'
 require './helpers'
 require 'pp'
 
-class App < Sinatra::Base
+class App < Sinatra::Base 
 
   helpers Helpers
 
@@ -40,6 +41,8 @@ class App < Sinatra::Base
   end
 
   get '/chart/:name' do
+
+
     haml :chart
   end
 
