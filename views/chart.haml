@@ -1,0 +1,7 @@
+%script{ :src => "/vendor/chartkick.js" }
+%script{ :src => "http://www.google.com/jsapi" }
+.nav
+  %form{ :action => "/", :method => "get" }
+    %button{:type => 'submit', :class => 'btn'} Back
+.chart
+  %div{:class => 'container'}= pie_chart ({"Football" => 10, "Basketball" => 5, "Foofsd" => 10, "Basketbfsd" => 5})

@@ -1,9 +1,12 @@
+#!/usr/bin/env ruby
 #require 'celluloid/autostart'
 #require 'reel/rack/server'
 require 'sinatra/base'
 require 'tilt/haml'
 require 'tilt/sass'
+require 'chartkick'
 require './helpers'
+require 'pp'
 
 class App < Sinatra::Base
 
@@ -25,11 +28,29 @@ class App < Sinatra::Base
     scss params[:file].intern
   end
 
-  get '/*' do
+  get '/' do
+    @result = []  # this will hold results.
+
+    @result = Dir.glob('/tmp/test/*').map {|file| file.split('/').last}
     haml :app
   end
 
-  post '/login' do
+  get '/upload_dialogue' do
+    haml :upload_dialogue
+  end
+
+  get '/chart/:name' do
+    haml :chart
+  end
+
+  post '/upload' do
+    params['myfiles'].each do |file|
+      tempfile = file[:tempfile]
+      filename = file[:filename]
+      FileUtils.copy(tempfile.path, "/tmp/test/#{filename}")
+      FileUtils.rm(tempfile.path)
+    end
+   redirect '/'
   end
 
   run! if app_file == $0
