@@ -6,6 +6,7 @@ require 'tilt/haml'
 require 'tilt/sass'
 require 'chartkick'
 require 'csv'
+require './parser'
 require './helpers'
 require 'pp'
 
@@ -64,6 +65,7 @@ class App < Sinatra::Base
       filename = file[:filename]
       FileUtils.copy(tempfile.path, "/tmp/test/#{filename}")
       FileUtils.rm(tempfile.path)
+      Parser.parse("/tmp/test/#{filename}")
     end
    redirect '/'
   end
