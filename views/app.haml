@@ -5,15 +5,16 @@
   %table
     %thead
       %tr
-        %th Name
-        / %th Size
+        %th Test
+        %th Timeseries
         / %th Compressed size
     %tbody
-      %table
-        - @result.each do |i|
+      - @result.each do |dir,files|
+        - files.each_with_index do |file,index|
           %tr
             %td
-              - if i[0]
-                %span= i[0]
+              - if index == 0
+                %span= dir
             %td
-              %a{ :href => "/chart/#{i[0]}:#{i[1]}" }= i[1]
+              %a{ :href => "/chart/#{dir}:#{file}" }= file
+              / %a{ :href => "/chart/#{i[0]}:#{i[1]}" }= i[1]

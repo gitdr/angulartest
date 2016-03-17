@@ -30,21 +30,17 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    @result = []  # this will hold results.
+    @result = {}  # this will hold results.
 
     @dirs = Dir.glob('/tmp/test/**').select { |fn| File.directory?(fn) }.map {|file| file.split('/').last}
     pp @dirs
 
     @dirs.each do |dir|
       Dir.glob('/tmp/test/'+ dir +'/*').map {|file| file.split('/').last}.each_with_index do |file, index|
-        if index ==0 
-          @result << [dir,file]
-        else
-           @result << [nil,file]
-        end
+        (@result[dir] ||= []) << file
       end
     end
-    #
+    p @result
     haml :app
   end
 
@@ -53,10 +49,11 @@ class App < Sinatra::Base
   end
 
   get '/chart/:name' do
-    fn = '/tmp/test/' + params[:name].split(':').join('/')
+    split = params[:name].split(':')
+    fn = '/tmp/test/' + split.join('/')
     data = CSV.read(fn)
     data[0].shift
-    @chartname = data[1].shift
+    @chartname = split[0]+ '  /  '+ data[1].shift
     @result = data[0].select.each_with_index { |_,i| i % 10 == 0 }.zip(data[1].select.each_with_index { |_,i| i % 10 == 0 })
     haml :chart
   end

@@ -3,5 +3,7 @@
 .nav
   %form{ :action => "/", :method => "get" }
     %button{:type => 'submit', :class => 'btn'} Back
+.info
+  %h3= @chartname
 .chart
-  %div{:class => 'container'}= line_chart @result, id: "users-chart", height: "700px"
+  %div{:class => 'container'}= line_chart @result, id: "users-chart", height: "600px"
