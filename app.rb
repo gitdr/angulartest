@@ -53,8 +53,11 @@ class App < Sinatra::Base
   end
 
   get '/chart/:name' do
-
-
+    fn = '/tmp/test/' + params[:name].split(':').join('/')
+    data = CSV.read(fn)
+    data[0].shift
+    @chartname = data[1].shift
+    @result = data[0].select.each_with_index { |_,i| i % 10 == 0 }.zip(data[1].select.each_with_index { |_,i| i % 10 == 0 })
     haml :chart
   end
 

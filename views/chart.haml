@@ -4,4 +4,4 @@
   %form{ :action => "/", :method => "get" }
     %button{:type => 'submit', :class => 'btn'} Back
 .chart
-  %div{:class => 'container'}= pie_chart ({"Football" => 10, "Basketball" => 5, "Foofsd" => 10, "Basketbfsd" => 5})
+  %div{:class => 'container'}= line_chart @result, id: "users-chart", height: "700px"
