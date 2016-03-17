@@ -112,7 +112,7 @@ FileUtils::mkdir_p dir
 mh.keys.each do |key|
   fn = key.to_s.gsub(/\//,'')
 
-  CSV.open([dir,fn].join('/'), "wb") do |csv|
+  CSV.open([dir,fn].join('/')+'.csv', "wb") do |csv|
     csv << data.keys.unshift(nil)
     csv << data.values.map {|el| el[:average][key]}.unshift(key)
   end

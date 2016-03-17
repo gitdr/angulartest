@@ -32,7 +32,19 @@ class App < Sinatra::Base
   get '/' do
     @result = []  # this will hold results.
 
-    @result = Dir.glob('/tmp/test/*').map {|file| file.split('/').last}
+    @dirs = Dir.glob('/tmp/test/**').select { |fn| File.directory?(fn) }.map {|file| file.split('/').last}
+    pp @dirs
+
+    @dirs.each do |dir|
+      Dir.glob('/tmp/test/'+ dir +'/*').map {|file| file.split('/').last}.each_with_index do |file, index|
+        if index ==0 
+          @result << [dir,file]
+        else
+           @result << [nil,file]
+        end
+      end
+    end
+    #
     haml :app
   end
 
